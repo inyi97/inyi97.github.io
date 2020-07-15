@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>rpm包安装简单使用 | Hexo</title>
+  <title>基于KMS服务器的windows10激活 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="库文件查看二进制文件所依赖的库文件   ldd &#x2F;path&#x2F;to&#x2F;binary_fileldd &#x2F;bin&#x2F;cat   记录安装包信息的数据库位置 &#x2F;var&#x2F;lib&#x2F;rpm ,对rpm包的添加，卸载等操作都会记录  rpm管理命令安装rpm --root&#x3D;&#x2F;path&#x2F; 安装到指定路径的[install-options]选项，–test，-replacepkgs，–nodeps等带-U升级或安装,并且">
+  <meta name="description" content="前提条件：已经安装了OpenWrt作为软路由，启用了集成软路由的KMS服务器功能。 操作步骤 安装完windows10后，打开cmd或powershell，输入slmgr &#x2F;upk，卸载WINDOWS自带密钥。 输入slmgr &#x2F;ipk W269N-WFGWX-YVC9B-4J6C9-T83GX  slmgr &#x2F;skms 192.168.1.1（软路由IP地址） slmgr &#x2F;ato   Win1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="rpm包安装简单使用">
-<meta property="og:url" content="http://yoursite.com/2020/07/08/rpm%E5%8C%85%E5%AE%89%E8%A3%85%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="基于KMS服务器的windows10激活">
+<meta property="og:url" content="http://yoursite.com/2020/06/28/%E5%9F%BA%E4%BA%8EKMS%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84windows10%E6%BF%80%E6%B4%BB/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="库文件查看二进制文件所依赖的库文件   ldd &#x2F;path&#x2F;to&#x2F;binary_fileldd &#x2F;bin&#x2F;cat   记录安装包信息的数据库位置 &#x2F;var&#x2F;lib&#x2F;rpm ,对rpm包的添加，卸载等操作都会记录  rpm管理命令安装rpm --root&#x3D;&#x2F;path&#x2F; 安装到指定路径的[install-options]选项，–test，-replacepkgs，–nodeps等带-U升级或安装,并且">
+<meta property="og:description" content="前提条件：已经安装了OpenWrt作为软路由，启用了集成软路由的KMS服务器功能。 操作步骤 安装完windows10后，打开cmd或powershell，输入slmgr &#x2F;upk，卸载WINDOWS自带密钥。 输入slmgr &#x2F;ipk W269N-WFGWX-YVC9B-4J6C9-T83GX  slmgr &#x2F;skms 192.168.1.1（软路由IP地址） slmgr &#x2F;ato   Win1">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-08T07:56:00.000Z">
-<meta property="article:modified_time" content="2020-07-14T08:17:32.734Z">
+<meta property="article:published_time" content="2020-06-28T12:46:08.000Z">
+<meta property="article:modified_time" content="2020-06-28T17:36:05.000Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -154,62 +154,40 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-rpm包安装简单使用" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-基于KMS服务器的windows10激活" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      rpm包安装简单使用
+      基于KMS服务器的windows10激活
     </h1>
   
 
         
-        <a href="/2020/07/08/rpm%E5%8C%85%E5%AE%89%E8%A3%85%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2020-07-08T07:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-08</time>
+        <a href="/2020/06/28/%E5%9F%BA%E4%BA%8EKMS%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84windows10%E6%BF%80%E6%B4%BB/" class="archive-article-date">
+  	<time datetime="2020-06-28T12:46:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="库文件"><a href="#库文件" class="headerlink" title="库文件"></a>库文件</h3><p>查看二进制文件所依赖的库文件  </p>
-<p>ldd <em>/path/to/binary_file</em><br><code>ldd /bin/cat</code>  </p>
-<p>记录安装包信息的数据库位置 <strong>/var/lib/rpm</strong> ,对rpm包的添加，卸载等操作都会记录</p>
-<hr>
-<h3 id="rpm管理命令"><a href="#rpm管理命令" class="headerlink" title="rpm管理命令"></a>rpm管理命令</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p><code>rpm --root=/path/</code> 安装到指定路径的<br>[install-options]选项，–test，-replacepkgs，–nodeps等<br>带<code>-U</code>升级或安装,并且删除老版本，带<code>-F</code>只有在有老版本的情况下才升级安装  </p>
-<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><p><code>rpm -q</code> <em>Package_name<em>（只需要包名字，如</em>tree</em>,不需要版本号)<br><code>-ql</code> <em>Package_name</em> 列出此包的安装文件列表<br><code>-qa</code> 列出所有安装的包<br><code>-q --scripts</code> <em>Package_name</em> 查询包的脚本内容<br><code>qf</code> <em>/path/file</em> 查询文件属于哪个包<br><code>qpl</code> <em>Package_full_name</em> 安装包之前，查询包所包含的文件，<code>-p</code>对应package，对包文件的查询。<br><code>qpi</code> <em>Package_full_name</em> 对未安装包的信息查询<br><code>qi</code> <em>Package_name</em> 对已安装包的信息查询<br><code>qpi</code> <em>Package_full_name</em> 查看包的描述信息，包没有安装</p>
-<h4 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h4><p> <code>rpm -e</code> <em>Package_name</em>   –nodeps 强制删除</p>
-<p> 包内容解压工具 rpm2cpio<br><code>rpm2cpio</code> <em>filename.rpm</em> | cpio -tv 列出包内的文件列表<br><code>[root@centos7 data]# rpm2cpio tree-1.6.0-10.el7.x86_64.rpm |cpio -id ./usr/bin/tree</code>  将特定的文件解压出来  </p>
-<h4 id="包检验"><a href="#包检验" class="headerlink" title="包检验"></a>包检验</h4><p> <code>rpm -V</code> <em>Package_full_name</em> 包检验<br> 要验证包的完整性，需要导入密码，以CentOS6为例在安装盘的根目录有<strong>RPM-GPG-KEY-CentOS-6</strong>密钥，将它导入，就能对安装包进行验证。<br> <code>rpm -K Package_full_name</code> 检查包的完整性和签名<br> <code>rpm --import RPM-GPG-KEY-CentOS-6</code> 导入密钥<br> <code>rpm -qa &quot;gpg-pubkey&quot;</code> 参看导入的密钥<br> <code>rpm -qi gpg-pubkey-c105b9de-4e0fd3a3</code> 查看密钥的内容，和导入光盘的密钥一致。<br> <code>rpm -e gpg-pubkey-c105b9de-4e0fd3a3</code>  卸载密钥</p>
-<h3 id="内核升级"><a href="#内核升级" class="headerlink" title="内核升级"></a>内核升级</h3><p> 查看当前版本 <code>cat /etc/centos-release</code><br> 查询版本和编译号 <code>rpm -q kernel</code><br> 不推荐升级安装有风险,CentOS允许多版本核心并存,不是所有的软件都允许多版本并存<br> <code>rpm -ivh kernel-2.6.XXX-754.el6.x86_64.rpm --replacefiles</code> –replacefiles有冲突时，直接覆盖<br> 开机后有两个内核选项,删除时，必须选择一个版本号 <code>rpm -e kernel-2.6.XXX-754.el6.x86_64.rpm</code>  </p>
-<hr>
-<h3 id="安装包的常用地址"><a href="#安装包的常用地址" class="headerlink" title="安装包的常用地址"></a>安装包的常用地址</h3><ul>
-<li><p><a href="https://www.centos.org/download/" target="_blank" rel="noopener">https://www.centos.org/download/</a></p>
-</li>
-<li><p><a href="https://developer.aliyun.com/mirror/" target="_blank" rel="noopener">https://developer.aliyun.com/mirror/</a></p>
-</li>
-<li><p><a href="http://mirrors.sohu.com/" target="_blank" rel="noopener">http://mirrors.sohu.com/</a></p>
-</li>
-<li><p><a href="http://mirrors.163.com/" target="_blank" rel="noopener">http://mirrors.163.com/</a></p>
-</li>
-<li><p><a href="https://mirrors.huaweicloud.com/" target="_blank" rel="noopener">https://mirrors.huaweicloud.com/</a></p>
-</li>
-<li><p><a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/</a> </p>
-<p>第三方</p>
-</li>
-<li><p>Fedora-EPEL:Extra Packages for Enterprise Linux(官方推的附加安装包) </p>
-<p>搜索引擎：</p>
-</li>
-<li><p><a href="https://pkgs.org/" target="_blank" rel="noopener">https://pkgs.org/</a></p>
-</li>
-<li><p><a href="http://rpmfind.net/" target="_blank" rel="noopener">http://rpmfind.net/</a></p>
-</li>
-<li><p><a href="http://rpm.pbone.net/" target="_blank" rel="noopener">http://rpm.pbone.net/</a></p>
-</li>
-<li><p><a href="https://sourceforge.net/" target="_blank" rel="noopener">https://sourceforge.net/</a></p>
-</li>
+        <h3 id="前提条件："><a href="#前提条件：" class="headerlink" title="前提条件："></a>前提条件：</h3><p>已经安装了OpenWrt作为软路由，启用了集成软路由的KMS服务器功能。</p>
+<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><ol>
+<li>安装完windows10后，打开cmd或powershell，输入slmgr /upk，卸载WINDOWS自带密钥。</li>
+<li>输入slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX </li>
+<li>slmgr /skms 192.168.1.1（软路由IP地址）</li>
+<li>slmgr /ato</li>
+</ol>
+<ul>
+<li>Win10专业版KMS： W269N-WFGWX-YVC9B-4J6C9-T83GX</li>
+<li>Win10企业版KMS： NPPR9-FWDCX-D2C8J-H872K-2YT43</li>
+<li>Win10LTSB版KMS： DCPHK-NFMTC-H88MJ-PFHPY-QJ4BJ</li>
+<li>Win10教育版KMS： NW6C2-QMPVW-D7KKK-3GKT6-VCFB2</li>
+<li>Win7专业版KMS： FJ82H-XT6CR-J8D7P-XQJJ2-GPDD4</li>
+<li>Win7企业版KMS： 33PXH-7Y6KF-2VJC9-XBBR8-HVTHH</li>
 </ul>
 
       
@@ -290,7 +268,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/08/rpm%E5%8C%85%E5%AE%89%E8%A3%85%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/28/%E5%9F%BA%E4%BA%8EKMS%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84windows10%E6%BF%80%E6%B4%BB/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -304,11 +282,15 @@
   
 <nav id="article-nav">
   
-  
-    <a href="/2020/06/28/%E5%9F%BA%E4%BA%8EKMS%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84windows10%E6%BF%80%E6%B4%BB/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">基于KMS服务器的windows10激活</div>
-      <i class="icon-circle-right"></i>
+    <a href="/2020/07/08/rpm%E5%8C%85%E5%AE%89%E8%A3%85%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          rpm包安装简单使用
+        
+      </div>
     </a>
+  
   
 </nav>
 
