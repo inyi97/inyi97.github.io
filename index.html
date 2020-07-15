@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-rpm包安装简单使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/08/rpm%E5%8C%85%E5%AE%89%E8%A3%85%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2020-07-08T07:56:00.000Z" itemprop="datePublished">2020-07-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/08/rpm%E5%8C%85%E5%AE%89%E8%A3%85%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">rpm包安装简单使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="库文件"><a href="#库文件" class="headerlink" title="库文件"></a>库文件</h3><p>查看二进制文件所依赖的库文件  </p>
+<p>ldd <em>/path/to/binary_file</em><br><code>ldd /bin/cat</code>  </p>
+<p>记录安装包信息的数据库位置 <strong>/var/lib/rpm</strong> ,对rpm包的添加，卸载等操作都会记录</p>
+<hr>
+<h3 id="rpm管理命令"><a href="#rpm管理命令" class="headerlink" title="rpm管理命令"></a>rpm管理命令</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p><code>rpm --root=/path/</code> 安装到指定路径的<br>[install-options]选项，–test，-replacepkgs，–nodeps等<br>带<code>-U</code>升级或安装,并且删除老版本，带<code>-F</code>只有在有老版本的情况下才升级安装  </p>
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><p><code>rpm -q</code> <em>Package_name<em>（只需要包名字，如</em>tree</em>,不需要版本号)<br><code>-ql</code> <em>Package_name</em> 列出此包的安装文件列表<br><code>-qa</code> 列出所有安装的包<br><code>-q --scripts</code> <em>Package_name</em> 查询包的脚本内容<br><code>qf</code> <em>/path/file</em> 查询文件属于哪个包<br><code>qpl</code> <em>Package_full_name</em> 安装包之前，查询包所包含的文件，<code>-p</code>对应package，对包文件的查询。<br><code>qpi</code> <em>Package_full_name</em> 对未安装包的信息查询<br><code>qi</code> <em>Package_name</em> 对已安装包的信息查询<br><code>qpi</code> <em>Package_full_name</em> 查看包的描述信息，包没有安装</p>
+<h4 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h4><p> <code>rpm -e</code> <em>Package_name</em>   –nodeps 强制删除</p>
+<p> 包内容解压工具 rpm2cpio<br><code>rpm2cpio</code> <em>filename.rpm</em> | cpio -tv 列出包内的文件列表<br><code>[root@centos7 data]# rpm2cpio tree-1.6.0-10.el7.x86_64.rpm |cpio -id ./usr/bin/tree</code>  将特定的文件解压出来  </p>
+<h4 id="包检验"><a href="#包检验" class="headerlink" title="包检验"></a>包检验</h4><p> <code>rpm -V</code> <em>Package_full_name</em> 包检验<br> 要验证包的完整性，需要导入密码，以CentOS6为例在安装盘的根目录有<strong>RPM-GPG-KEY-CentOS-6</strong>密钥，将它导入，就能对安装包进行验证。<br> <code>rpm -K Package_full_name</code> 检查包的完整性和签名<br> <code>rpm --import RPM-GPG-KEY-CentOS-6</code> 导入密钥<br> <code>rpm -qa &quot;gpg-pubkey&quot;</code> 参看导入的密钥<br> <code>rpm -qi gpg-pubkey-c105b9de-4e0fd3a3</code> 查看密钥的内容，和导入光盘的密钥一致。<br> <code>rpm -e gpg-pubkey-c105b9de-4e0fd3a3</code>  卸载密钥</p>
+<h3 id="内核升级"><a href="#内核升级" class="headerlink" title="内核升级"></a>内核升级</h3><p> 查看当前版本 <code>cat /etc/centos-release</code><br> 查询版本和编译号 <code>rpm -q kernel</code><br> 不推荐升级安装有风险,CentOS允许多版本核心并存,不是所有的软件都允许多版本并存<br> <code>rpm -ivh kernel-2.6.XXX-754.el6.x86_64.rpm --replacefiles</code> –replacefiles有冲突时，直接覆盖<br> 开机后有两个内核选项,删除时，必须选择一个版本号 <code>rpm -e kernel-2.6.XXX-754.el6.x86_64.rpm</code>  </p>
+<hr>
+<h3 id="安装包的常用地址"><a href="#安装包的常用地址" class="headerlink" title="安装包的常用地址"></a>安装包的常用地址</h3><ul>
+<li><p><a href="https://www.centos.org/download/" target="_blank" rel="noopener">https://www.centos.org/download/</a></p>
+</li>
+<li><p><a href="https://developer.aliyun.com/mirror/" target="_blank" rel="noopener">https://developer.aliyun.com/mirror/</a></p>
+</li>
+<li><p><a href="http://mirrors.sohu.com/" target="_blank" rel="noopener">http://mirrors.sohu.com/</a></p>
+</li>
+<li><p><a href="http://mirrors.163.com/" target="_blank" rel="noopener">http://mirrors.163.com/</a></p>
+</li>
+<li><p><a href="https://mirrors.huaweicloud.com/" target="_blank" rel="noopener">https://mirrors.huaweicloud.com/</a></p>
+</li>
+<li><p><a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/</a> </p>
+<p>第三方</p>
+</li>
+<li><p>Fedora-EPEL:Extra Packages for Enterprise Linux(官方推的附加安装包) </p>
+<p>搜索引擎：</p>
+</li>
+<li><p><a href="https://pkgs.org/" target="_blank" rel="noopener">https://pkgs.org/</a></p>
+</li>
+<li><p><a href="http://rpmfind.net/" target="_blank" rel="noopener">http://rpmfind.net/</a></p>
+</li>
+<li><p><a href="http://rpm.pbone.net/" target="_blank" rel="noopener">http://rpm.pbone.net/</a></p>
+</li>
+<li><p><a href="https://sourceforge.net/" target="_blank" rel="noopener">https://sourceforge.net/</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/08/rpm%E5%8C%85%E5%AE%89%E8%A3%85%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" data-id="ckclnv05900002ls6eu2x7p2y" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/07/08/rpm%E5%8C%85%E5%AE%89%E8%A3%85%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">rpm包安装简单使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
