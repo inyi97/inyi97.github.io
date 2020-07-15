@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Hexo</title>
+  <title>yum的服务配置 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="yum的C&#x2F;S架构服务器上的yum repo存放了两种内容，一个是的rpm安装包（光盘&#x2F;media&#x2F;CentOS_6.10_Final&#x2F;Packages&#x2F;)，另一个是meta数据，记录了包信息的元数据(光盘&#x2F;media&#x2F;CentOS_6.10_Final&#x2F;repodata&#x2F;)。客户端的配置信息在&#x2F;etc&#x2F;yum.repos.d&#x2F;*.repo，设定了指向服务器的信息，客户端会先将服务器上的meta数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yum的服务配置">
+<meta property="og:url" content="http://yoursite.com/2020/07/09/yum%E7%9A%84%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="yum的C&#x2F;S架构服务器上的yum repo存放了两种内容，一个是的rpm安装包（光盘&#x2F;media&#x2F;CentOS_6.10_Final&#x2F;Packages&#x2F;)，另一个是meta数据，记录了包信息的元数据(光盘&#x2F;media&#x2F;CentOS_6.10_Final&#x2F;repodata&#x2F;)。客户端的配置信息在&#x2F;etc&#x2F;yum.repos.d&#x2F;*.repo，设定了指向服务器的信息，客户端会先将服务器上的meta数">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/07/09/yum%E7%9A%84%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/picture%5Cyum%5Cconfig-file.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/09/yum%E7%9A%84%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/picture%5Cyum%5Ccd-ls.png">
+<meta property="article:published_time" content="2020-07-09T08:30:38.000Z">
+<meta property="article:modified_time" content="2020-07-14T08:15:16.704Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/07/09/yum%E7%9A%84%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/picture%5Cyum%5Cconfig-file.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,103 +157,224 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-yum的服务配置" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      yum的服务配置
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/09/yum%E7%9A%84%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+
+        
+        <a href="/2020/07/09/yum%E7%9A%84%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" class="archive-article-date">
   	<time datetime="2020-07-09T08:30:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-09</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/09/yum%E7%9A%84%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/">yum的服务配置</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="yum的C-S架构"><a href="#yum的C-S架构" class="headerlink" title="yum的C/S架构"></a>yum的C/S架构</h3><p>服务器上的yum repo存放了两种内容，一个是的rpm安装包（光盘/media/CentOS_6.10_Final/Packages/)，另一个是meta数据，记录了包信息的元数据(光盘/media/CentOS_6.10_Final/repodata/)。<br>客户端的配置信息在/etc/yum.repos.d/*.repo，设定了指向服务器的信息，客户端会先将服务器上的meta数据下载到本地的缓存中，如果服务器上更新了yum repo数据库，客户端需要清空缓存重新加载meta数据库信息。</p>
+<p>服务器地址如下方式：</p>
+<ul>
+<li>http://</li>
+<li>https://</li>
+<li>ftp://</li>
+<li>file:// 本机路径</li>
+</ul>
+<h3 id="yum服务器端的配置案例一（本地光盘方式）"><a href="#yum服务器端的配置案例一（本地光盘方式）" class="headerlink" title="yum服务器端的配置案例一（本地光盘方式）"></a>yum服务器端的配置案例一（本地光盘方式）</h3><p>以CentOS6为例，此例仅提供本机服务(file://），光盘挂载点：/media/CentOS_6.10_Final/</p>
+<ol>
+<li>新建以repo为后缀的文件/etc/yum.repos.d/base.repo  </li>
+<li>编辑此文件，最简单的设置   <pre><code>[base]  
+name=cdrom repo  
+baseurl=file:///media/CentOS_6.10_Final/  
+gpgcheck=0  </code></pre></li>
+</ol>
+<p>baseurl的路径是repodata的上级目录，<strong>注意file后面接三个///</strong>. 路径可以多个，做冗余<br><img src="picture%5Cyum%5Cconfig-file.png" alt="config-file"><br><img src="picture%5Cyum%5Ccd-ls.png" alt="cd-ls"></p>
+<p>其他配置选项：<br>gpgcheck=1              //添加包检验功能，默认1，启用<br>gpgkey=file://media/CentOS_6.10_Final/RPM-GPG-KEY-CentOS-6<br>enabled={1|0}           //默认1，启用<br>failovermethod{roundrobin|priority}  //对个路径的选择，roundrobin随机选择，默认为priority,顺序选择<br>mirrorlist指定文件，文件包含多个地址列表，这个用于取代baseurl  </p>
+<ol start="3">
+<li>客户端安装测试<br><code>yum repolist</code><br><code>yum install tree</code> </li>
+</ol>
+<h3 id="yum服务器端的配置案例二（http方式）"><a href="#yum服务器端的配置案例二（http方式）" class="headerlink" title="yum服务器端的配置案例二（http方式）"></a>yum服务器端的配置案例二（http方式）</h3><ol>
+<li>记得关闭防火墙，SELinux<br>CentOS7  </li>
+</ol>
+<ul>
+<li><code>systemctl disable firewalld</code></li>
+<li><code>systemctl stop firewalld</code>  </li>
+<li>编辑 /etc/selinux/config文件，改为SELINUX=disabled<br>CentOS6  </li>
+<li><code>chkconfig iptables off</code></li>
+<li><code>service iptables stop</code></li>
+</ul>
+<ol start="2">
+<li></li>
+</ol>
+<h3 id="yum服务器端的配置案例三-添加EPEL源"><a href="#yum服务器端的配置案例三-添加EPEL源" class="headerlink" title="yum服务器端的配置案例三-添加EPEL源"></a>yum服务器端的配置案例三-添加EPEL源</h3><pre><code>[epel]  
+name=epel  
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/epel/7/x86_64/  
+gpgcheck=0  </code></pre><h3 id="yum的命令选项"><a href="#yum的命令选项" class="headerlink" title="yum的命令选项"></a>yum的命令选项</h3><p><code>yum info system-config-kickstart</code>  查询包信息<br><code>yum list</code> 列出所有的包<br>带@标致的代表已经安装的：</p>
+<ul>
+<li>@anaconda 装机时候安装的</li>
+<li>@base 通过源base安装的</li>
+<li><code>yum clean all</code> 清理缓存</li>
+<li><code>yum provides</code> 查看包的特性  </li>
+<li><code>yum update</code> 升级，慎用  </li>
+</ul>
+<p>yum自动安装依赖的包，但是如果用<code>yum remove</code>只会卸载指定的包，并不会卸载依赖的包，这时候可以查询yum历史操作，进行撤销删除。</p>
+<ul>
+<li><code>yum history</code>    查询所有的历史</li>
+<li><code>yum history info x</code> 查询id号x的详细操作</li>
+<li><code>yum history undo x</code> 撤销id号x的操作。</li>
+<li><code>yum history redo x</code> 如果对撤销的操作后悔了，重做id号x  </li>
+<li><code>yum search</code> 带特定关键字的包     </li>
+</ul>
+<h3 id="神奇挂载光盘方法"><a href="#神奇挂载光盘方法" class="headerlink" title="神奇挂载光盘方法"></a>神奇挂载光盘方法</h3><p><code>systemctl enable autofs</code><br><code>systemctl start autofs</code>  </p>
+<h3 id="客户端设置外部源"><a href="#客户端设置外部源" class="headerlink" title="客户端设置外部源"></a>客户端设置外部源</h3><p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/epel/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/epel/</a> EPEL源</p>
+<ul>
+<li><a href="https://www.centos.org/download/" target="_blank" rel="noopener">https://www.centos.org/download/</a></li>
+<li><a href="https://developer.aliyun.com/mirror/" target="_blank" rel="noopener">https://developer.aliyun.com/mirror/</a></li>
+<li><a href="http://mirrors.sohu.com/" target="_blank" rel="noopener">http://mirrors.sohu.com/</a></li>
+<li><a href="http://mirrors.163.com/" target="_blank" rel="noopener">http://mirrors.163.com/</a></li>
+<li><a href="https://mirrors.huaweicloud.com/" target="_blank" rel="noopener">https://mirrors.huaweicloud.com/</a></li>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/</a> </li>
+</ul>
+<h3 id="yum的repo配置文件的变量"><a href="#yum的repo配置文件的变量" class="headerlink" title="yum的repo配置文件的变量"></a>yum的repo配置文件的变量</h3><ul>
+<li>$releasever:当前OS的发行版的主版本号</li>
+<li>$arch:平台，i386,x86_64等</li>
+<li>$basearch: 基本平台<br>如：<a href="http://server/centos/$releasever/$basearch" target="_blank" rel="noopener">http://server/centos/$releasever/$basearch</a> </li>
+</ul>
+<h3 id="yum的主配置文件-etc-yum-conf"><a href="#yum的主配置文件-etc-yum-conf" class="headerlink" title="yum的主配置文件/etc/yum.conf"></a>yum的主配置文件/etc/yum.conf</h3><p>[main]<br>cachedir=/var/cache/yum/$basearch/$releasever  //包缓存点<br>keepcache=0                                    //安装完成后是否保留包，0删除，1保留<br>debuglevel=2<br>logfile=/var/log/yum.log<br>exactarch=1                                    //是否要比配架构<br>obsoletes=1<br>gpgcheck=1<br>plugins=1                                      //是否支持插件<br>installonly_limit=5                            //多个进程安装<br>bugtracker_url=<a href="http://bugs.centos.org/set_project.php?project_id=23&amp;ref=http://bugs.centos.org/bug_report_page.php?category=yum" target="_blank" rel="noopener">http://bugs.centos.org/set_project.php?project_id=23&amp;ref=http://bugs.centos.org/bug_report_page.php?category=yum</a><br>distroverpkg=centos-release</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/09/yum%E7%9A%84%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/08/rpm%E5%8C%85%E5%AE%89%E8%A3%85%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2020-07-08T07:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-08</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/08/rpm%E5%8C%85%E5%AE%89%E8%A3%85%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">rpm包安装简单使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/08/rpm%E5%8C%85%E5%AE%89%E8%A3%85%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">rpm包安装简单使用</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/28/%E5%9F%BA%E4%BA%8EKMS%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84windows10%E6%BF%80%E6%B4%BB/" class="archive-article-date">
-  	<time datetime="2020-06-28T12:46:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/28/%E5%9F%BA%E4%BA%8EKMS%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84windows10%E6%BF%80%E6%B4%BB/">基于KMS服务器的windows10激活</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -269,8 +397,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
